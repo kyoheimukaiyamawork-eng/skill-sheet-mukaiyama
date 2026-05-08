@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>スキルシート｜向山 恭平</title>
+<style>
+  :root {
+    --ink: #1a2742;
+    --ink-soft: #4a5878;
+    --ink-mute: #8a93a8;
+    --line: #e2e6ee;
+    --bg: #fafbfc;
+    --accent: #1a73e8;
+    --accent-soft: #e8f0fe;
+    --green: #137333;
+    --warn: #b06000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt";
+  }
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+  /* Header */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 40px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .hero .role {
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .hero .meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.9;
+  }
+  .hero .meta strong {
+    display: block;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  /* Section */
+  section { margin-bottom: 44px; }
+  .sec-h {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .sec-h::before {
+    content: "■";
+    margin-right: 8px;
+    color: var(--accent);
+  }
+  /* Summary */
+  .summary {
+    font-size: 15px;
+    color: var(--ink-soft);
+    background: white;
+    padding: 24px 28px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+  }
+  .summary strong { color: var(--ink); font-weight: 600; }
+  /* Numbers */
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .num-card {
+    background: white;
+    padding: 18px 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .num-card .v {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .num-card .l {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .skill-card {
+    background: white;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .skill-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .tag.lv-3 { background: var(--accent); color: white; }
+  .tag.lv-2 { background: var(--accent-soft); color: var(--accent); }
+  .tag.lv-1 { background: #f0f2f6; color: var(--ink-soft); }
+  /* Projects */
+  .project {
+    background: white;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .project .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .project .top h3 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .project .top h3 .num {
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .project .top .period {
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+  .project .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .project .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .stack .tg {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: #f4f5f8;
+    color: var(--ink-soft);
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  /* Career timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--line);
+  }
+  .tl-item { position: relative; margin-bottom: 22px; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+  }
+  .tl-item .when {
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .tl-item .what {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+    margin: 2px 0 4px;
+  }
+  .tl-item .detail {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  /* Soft skills */
+  .soft {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .soft-item {
+    background: white;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .soft-item h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .soft-item p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  /* Footer */
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-align: center;
+  }
+  /* Responsive */
+  @media (max-width: 640px) {
+    .page { padding: 28px 18px 60px; }
+    .hero { grid-template-columns: 1fr; align-items: start; }
+    .hero .meta { text-align: left; }
+    .hero h1 { font-size: 28px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .soft { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: white; }
+    .page { padding: 20mm; max-width: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div>
+      <h1>向山 恭平</h1>
+      <div class="role">BPR / DX推進 / フロントエンド実装　— 構造化と完遂力で「使われ続ける仕組み」を作る</div>
+    </div>
+    <div class="meta">
+      <strong>Kyohei Mukaiyama</strong>
+      kyohei.mukaiyama.work@gmail.com<br>
+      2026年5月 現在
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <section>
+    <div class="sec-h">Summary</div>
+    <div class="summary">
+      事業会社の現場に入り込み、<strong>5.3万通りに変動する複雑なビジネスロジックの構造化</strong>と、<strong>36拠点・30種帳票→7種への大規模BPR</strong>を完遂してきました。要件定義・設計・運用設計・研修・モニタリング指標まで自分で組むことで、業務時間<strong>71%削減</strong>・トラブル<strong>96%削減</strong>を「導入後も継続して維持」できる仕組みとして実装しています。<br><br>
+      技術面では、<strong>kintone を JavaScript / CSS でゴリゴリにカスタマイズ</strong>し、標準機能では実現できない動的UI・条件分岐フォーム・外部API連携まで内製で実装。直近はクライアント案件（A1030）で <strong>HTML / CSS / JavaScript による UI/UX モック構築 → Vercel デプロイ</strong>までを一気通貫でカバーしています。
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section>
+    <div class="sec-h">Track Record（数字で語る実績）</div>
+    <div class="numbers">
+      <div class="num-card"><div class="v">71<span style="font-size:16px">%</span></div><div class="l">業務時間削減（退去業務改革）</div></div>
+      <div class="num-card"><div class="v">96<span style="font-size:16px">%</span></div><div class="l">トラブル削減（96%減・誤発送ゼロ）</div></div>
+      <div class="num-card"><div class="v">93<span style="font-size:16px">%</span></div><div class="l">行政監査の指摘削減</div></div>
+      <div class="num-card"><div class="v">90<span style="font-size:16px">%</span></div><div class="l">分析資料作成の工数削減</div></div>
+      <div class="num-card"><div class="v">53,000</div><div class="l">構造化した価格パターン</div></div>
+      <div class="num-card"><div class="v">36</div><div class="l">DX推進の対象施設数</div></div>
+      <div class="num-card"><div class="v">39<span style="font-size:16px">倍</span></div><div class="l">LINE公式登録（200→7,800）</div></div>
+      <div class="num-card"><div class="v">66<span style="font-size:14px">万円</span></div><div class="l">年間システム経費削減</div></div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <div class="sec-h">Skills</div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h3>kintone カスタマイズ（JavaScript / CSS でゴリゴリ）</h3>
+        <div class="tags">
+          <span class="tag lv-3">JavaScript ゴリゴリカスタマイズ</span>
+          <span class="tag lv-3">CSS ゴリゴリスタイリング</span>
+          <span class="tag lv-3">プラグイン開発・配布</span>
+          <span class="tag lv-3">アプリ設計・作成（顧客管理・進捗管理）</span>
+          <span class="tag lv-3">REST API / Webhook 連携</span>
+          <span class="tag lv-2">動的フォーム・条件分岐入力</span>
+          <span class="tag lv-2">プロセス管理・アクセス権限・操作ログ監視</span>
+          <span class="tag lv-2">ペーパーレス・DX 自動化対応</span>
+          <span class="tag lv-2">運用保守・社内レクチャー</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>フロントエンド実装（A1030 案件で実証）</h3>
+        <div class="tags">
+          <span class="tag lv-3">HTML5（セマンティックマークアップ）</span>
+          <span class="tag lv-3">CSS3（Flexbox / Grid / カスタムプロパティ / アニメーション）</span>
+          <span class="tag lv-3">JavaScript (Vanilla / ES6+)</span>
+          <span class="tag lv-3">DOM 操作・イベント駆動・Fetch API</span>
+          <span class="tag lv-2">レスポンシブ設計</span>
+          <span class="tag lv-2">UI/UX モック構築</span>
+          <span class="tag lv-2">コンポーネント設計（埋め込み CSS/JS）</span>
+          <span class="tag lv-2">Vercel デプロイ</span>
+          <span class="tag lv-2">GitHub Pages（private/public 二重管理）</span>
+          <span class="tag lv-1">アクセシビリティ・SEO 配慮</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>バックエンド・データベース</h3>
+        <div class="tags">
+          <span class="tag lv-3">Java（業務アプリ開発）</span>
+          <span class="tag lv-3">SQL / DB 設計（テーブル設計・クエリ・正規化）</span>
+          <span class="tag lv-3">Python（実務 / 自動化・データ処理）</span>
+          <span class="tag lv-2">REST API 設計・連携</span>
+          <span class="tag lv-2">データモデリング（5.3 万通り価格 DB の構造化実績）</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>データ・自動化</h3>
+        <div class="tags">
+          <span class="tag lv-3">Excel（VLOOKUP / IF / ピボット / VBA マクロ）</span>
+          <span class="tag lv-3">Power Query（ETL 設計）</span>
+          <span class="tag lv-2">CRM 設計・運用</span>
+          <span class="tag lv-2">データクレンジング・統合</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>業務再定義（BPR）・要件定義</h3>
+        <div class="tags">
+          <span class="tag lv-3">システム要件定義書 作成（内製化）</span>
+          <span class="tag lv-3">業務プロセス標準化</span>
+          <span class="tag lv-3">ステークホルダー合意形成</span>
+          <span class="tag lv-2">ガバナンス強化・リスク管理</span>
+          <span class="tag lv-2">業務フロー設計・運用定着</span>
+          <span class="tag lv-2">コンプライアンス・行政監査対応</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>クラウド・AI活用</h3>
+        <div class="tags">
+          <span class="tag lv-2">AWS（基盤設計の知見・上位資格学習中）</span>
+          <span class="tag lv-3">生成AI 業務適用（Claude / GPT）</span>
+          <span class="tag lv-3">Claude Code による開発自動化</span>
+          <span class="tag lv-2">プロンプト設計・自動化パイプライン</span>
+          <span class="tag lv-1">MCP サーバ統合（Notion / Gmail / Drive 連携）</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section>
+    <div class="sec-h">Selected Projects</div>
+
+    <div class="project">
+      <div class="top">
+        <h3><span class="num">A1030</span>AIツール メイン画面 UI/UX 構築</h3>
+        <div class="period">2026-04 〜 2026-05（クライアント納品案件）</div>
+      </div>
+      <div class="desc">
+        AIツールのメイン画面・サイドバー・履歴内検索・モデル切替・AIトーク全画面UIなどを、複数モック案（main3〜5）として実装。<strong>private リポジトリでソース管理</strong>＋<strong>public リポジトリで Vercel デプロイ</strong>の二重構成を設計。共通スタイル/スクリプトの埋め込みコンポーネント化、トーク機能の比較検証用モック作成、納品確認ページまで一気通貫で対応。
+      </div>
+      <div class="stack">
+        <span class="tg">HTML5</span><span class="tg">CSS3</span><span class="tg">Vanilla JS</span>
+        <span class="tg">Vercel</span><span class="tg">GitHub Pages</span>
+        <span class="tg">UI/UX 設計</span><span class="tg">コンポーネント設計</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="top">
+        <h3>退去業務改革 — 23施設・46パターン構造化</h3>
+        <div class="period">2024 〜 2025（リゾートトラスト メディカル本部）</div>
+      </div>
+      <div class="desc">
+        2社運営×23施設×多種多様な契約プランで「精算の正解」が誰にも分からない状態から、46パターンの精算ロジックを一覧化・構造化。システム設計／運用手順書／例外フロー／研修／モニタリング指標まで自分で全工程を組み、<strong>業務時間71%削減・トラブル96%削減</strong>を達成。改革後も継続して維持。
+      </div>
+      <div class="stack">
+        <span class="tg">BPR</span><span class="tg">要件定義</span><span class="tg">kintone</span>
+        <span class="tg">VBA</span><span class="tg">運用設計</span><span class="tg">合意形成</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="top">
+        <h3>動的価格DB — 5.3万通りの構造化と全社横断運用</h3>
+        <div class="period">2024 〜 現在</div>
+      </div>
+      <div class="desc">
+        居室の条件（広さ・向き・階層・年齢）で5.3万通りに変動する属人的価格設定を解体・データベース化。見積〜請求まで自動連携させ、営業／法務／経理／監査の全工程の整合性を担保した業務フローを策定・運用導入。<strong>分析リードタイム90%削減</strong>。
+      </div>
+      <div class="stack">
+        <span class="tg">DB設計</span><span class="tg">Power Query</span><span class="tg">kintone</span>
+        <span class="tg">JavaScript</span><span class="tg">業務横断設計</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="top">
+        <h3>帳票標準化 — 36施設・30種→7種への集約</h3>
+        <div class="period">2024 〜 2025</div>
+      </div>
+      <div class="desc">
+        国内36拠点に分散し形骸化していた30種類の帳票を、本質的な7種に集約。現場の運用負荷を軽減しつつ<strong>行政監査の指摘事項を93%削減</strong>。「説得」ではなく「楽になる体験」を試験運用で示すことで、現場が自ら選んで移行する状態を作った。
+      </div>
+      <div class="stack">
+        <span class="tg">BPR</span><span class="tg">標準化</span><span class="tg">変革管理</span>
+        <span class="tg">ガバナンス</span><span class="tg">研修設計</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Career timeline -->
+  <section>
+    <div class="sec-h">Career</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="when">2026-05 〜</div>
+        <div class="what">準備期間（フリーランス）</div>
+        <div class="detail">業務改革経験の体系化と、生成AI／Claude Code を用いた開発自動化の実践。クライアント案件（A1030）の納品。</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2023-12 〜 2026-04</div>
+        <div class="what">リゾートトラスト株式会社 メディカル本部 顧客情報管理室（主事）</div>
+        <div class="detail">36施設のDX推進・BPR・ガバナンス強化を担当。価格DB構築、帳票標準化、契約・退去・精算フローのデジタル化、CRM統括。</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2023-02 〜 2023-12</div>
+        <div class="what">リゾートトラスト株式会社 会員業務部 企画管理課</div>
+        <div class="detail">8,500件の会員データ管理／7,500件のスクリーニング／重大リスクの未然防止スキーム構築。</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2022-04 〜 2023-01</div>
+        <div class="what">トヨタホーム株式会社 営業統括部 営業推進室</div>
+        <div class="detail">全国16支部の見込顧客データ分析、競合調査、YouTubeセミナー（約600名）・展示会の集客KPI分析、VR案内ツール導入推進。</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">〜 2022-03</div>
+        <div class="what">明治大学 卒業</div>
+        <div class="detail">幼少期から大学まで18年間スピードスケート（インターハイ・国体 優勝経験）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft skills -->
+  <section>
+    <div class="sec-h">Strengths</div>
+    <div class="soft">
+      <div class="soft-item">
+        <h4>完遂力</h4>
+        <p>「誰の仕事でもない領域」に踏み込み、設計から定着・モニタリングまで自分の責任範囲として持ち切る。</p>
+      </div>
+      <div class="soft-item">
+        <h4>構造化</h4>
+        <p>5.3万通りや46パターンといった複雑なビジネスロジックを分解し、再現性のある仕組みに落とす。</p>
+      </div>
+      <div class="soft-item">
+        <h4>合意形成</h4>
+        <p>営業／法務／経理／監査の利害が絡む部門間を、データと「楽になる体験」で動かす変革推進力。</p>
+      </div>
+      <div class="soft-item">
+        <h4>逆算思考</h4>
+        <p>18年間のスピードスケートで培った、目標から逆算して0.01秒の摩擦を削り続ける習慣。</p>
+      </div>
+      <div class="soft-item">
+        <h4>学習速度</h4>
+        <p>未経験領域も「現場で一次情報を取りに行く」スタイルで早期戦力化。AWS上位資格にも継続的に学習。</p>
+      </div>
+      <div class="soft-item">
+        <h4>AI活用</h4>
+        <p>Claude Code を中核に、業務自動化・コード生成・要件整理を日次運用。生成AIを「武器」として実装。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Last updated: 2026-05-08　|　Web版スキルシート（HTML / Vercelデプロイ可）
+  </footer>
+
+</div>
+</body>
+</html>
